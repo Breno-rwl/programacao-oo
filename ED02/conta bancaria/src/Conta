@@ -1,0 +1,48 @@
+public class Conta {
+    protected String cliente;
+    protected double saldo;
+
+    public Conta(String cliente, double saldoInicial) {
+        this.cliente = cliente;
+        this.saldo = saldoInicial;
+    }
+
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+        } else {
+            System.out.println("Valor inválido para depósito.");
+        }
+    }
+
+    public void sacar(double valor) {
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor;
+        } else {
+            System.out.println("Saque inválido. Verifique o saldo.");
+        }
+    }
+
+    public void transferir(Conta destino, double valor) {
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor;
+            destino.depositar(valor);
+        } else {
+            System.out.println("Transferência inválida.");
+        }
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void imprimirExtrato() {
+        System.out.println("Cliente: " + cliente);
+        System.out.println("Saldo: R$ " + String.format("%.2f", saldo));
+    }
+
+    public void aplicarJurosDiarios() {
+        // Este método será sobrescrito nas subclasses
+    }
+}
+
